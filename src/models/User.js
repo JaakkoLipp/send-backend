@@ -6,3 +6,4 @@ const userSchema = new mongoose.Schema({
   // TODO: password hashing implemented later
   password: { type: String, required: true },
 });
+//TODO: USERS OR FIREFOX SEND UNIQUE LINK METHOD?
