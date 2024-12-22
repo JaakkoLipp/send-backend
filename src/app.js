@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.DB_URI || "mongodb://localhost:27017")
+  .connect(process.env.DB_URI || "mongodb://localhost:27017/send")
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use("/api/files", fileRoutes);
 app.use("/", generalRoutes);
 
-// Start server
+// TODO: Start server move to server.js for automated testing
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -5,6 +5,9 @@ const fileSchema = new mongoose.Schema({
   name: String,
   path: String,
   uploadedAt: { type: Date, default: Date.now },
+  expiresAt: { type: Date, required: true },
 });
-// TODO: add TTL
+
+fileSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+
 module.exports = mongoose.model("File", fileSchema);

@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("./app");
+const app = require("../../src/app");
 
 test("GET / should return Service UP", async () => {
   const response = await request(app).get("/");

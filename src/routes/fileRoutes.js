@@ -17,7 +17,7 @@ const upload = multer({ storage });
 
 // Routes
 router.post("/upload", upload.single("file"), uploadFile);
-router.get("/:fileid", getFile);
+router.get("/download/:id", getFile);
 
 router.get("/all", (req, res) => {
   res.json({ message: "TBD" });
