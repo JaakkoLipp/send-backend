@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
 const fileSchema = new mongoose.Schema({
-  filename: { type: String, required: true },
-  originalname: { type: String, required: true },
-  uploadDate: { type: Date, default: Date.now },
+  id: { type: String, unique: true, required: true },
+  name: String,
+  path: String,
+  uploadedAt: { type: Date, default: Date.now },
 });
-
+// TODO: add TTL
 module.exports = mongoose.model("File", fileSchema);
