@@ -5,6 +5,8 @@ const generalRoutes = require("./routes/generalRoutes");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+// TODO: testing, containers and deployment, CRUD compliancy, error popups, about component, ?user auth?, clean up.
+
 dotenv.config();
 
 const app = express();
