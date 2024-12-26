@@ -71,7 +71,7 @@ The backend service for the **File Sharing Application**, built with **Node.js**
   - **Method**: `POST`
   - **URL**: `/api/files/upload`
   - **Body**: `multipart/form-data` containing the file.
-  - **Headers**: Automatically enforces a 5 MB size limit.
+  - **Headers**: Automatically enforces a set size limit.
 
 - **Download a File**:
   - **Method**: `GET`
