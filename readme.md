@@ -2,7 +2,6 @@
 
 The backend service for the **File Sharing Application**, built with **Node.js** and **Express**, and uses **MongoDB** for file metadata storage. This backend is designed to work seamlessly with the [File Sharing Frontend](https://github.com/JaakkoLipp/send-frontend) React project.
 
----
 
 ## Features
 
@@ -13,7 +12,6 @@ The backend service for the **File Sharing Application**, built with **Node.js**
 - **Maximum File Size**: Enforces a file size limit (e.g., 5 MB) for uploads.
 - **Secure Headers**: Exposes essential headers like `Content-Disposition` for filename handling.
 
----
 
 ## Tech Stack
 
@@ -22,15 +20,12 @@ The backend service for the **File Sharing Application**, built with **Node.js**
 - **Multer**: Middleware for handling file uploads.
 - **MongoDB**: Remote database for storing file metadata.
 
----
-
 ## Requirements
 
 - **Node.js** (v16 or higher recommended)
 - **npm**
 - **MongoDB** (remote or local)
 
----
 
 ## Installation
 
@@ -57,7 +52,6 @@ The backend service for the **File Sharing Application**, built with **Node.js**
    ```
    Replace `your-mongodb-uri` with your actual MongoDB connection string.
 
----
 
 ## Usage
 
@@ -69,8 +63,6 @@ The backend service for the **File Sharing Application**, built with **Node.js**
 2. **Backend Server**:
    - The server will be running at `http://localhost:5000` (or the `PORT` specified in your `.env` file).
    - Ensure the [File Sharing Frontend](https://github.com/JaakkoLipp/send-frontend) is configured to communicate with this backend.
-
----
 
 ## API Endpoints
 
@@ -91,8 +83,6 @@ The backend service for the **File Sharing Application**, built with **Node.js**
 
 ### **Additional Features**
 - Files are automatically deleted after a time-to-live (TTL) period (e.g., 5 minutes).
-
----
 
 ## Project Structure
 
@@ -118,7 +108,6 @@ src/
 | `PORT`     | Port for the backend server             | `5000`                      |
 | `MONGO_URI`| MongoDB connection string               | `mongodb://your-mongodb-uri`|
 
----
 
 ## To-Do Features
 
@@ -131,7 +120,6 @@ src/
 - **Advanced Analytics**:
   - Track file downloads and provide statistics.
 
----
 
 ## License
 
