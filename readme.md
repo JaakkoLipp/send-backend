@@ -1,7 +1,3 @@
-Here's the updated and polished `README.md` for the **File Sharing Backend** repository:
-
----
-
 # File Sharing Backend
 
 The backend service for the **File Sharing Application**, built with **Node.js** and **Express**, and uses **MongoDB** for file metadata storage. This backend is designed to work seamlessly with the [File Sharing Frontend](https://github.com/JaakkoLipp/send-frontend) React project.
@@ -140,7 +136,3 @@ src/
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
----
-
-Let me know if you need help tweaking this further! 🚀
