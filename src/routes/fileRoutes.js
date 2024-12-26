@@ -13,7 +13,12 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
-const upload = multer({ storage });
+
+// Set file size limit
+const upload = multer({
+  storage,
+  limits: { fileSize: 500 * 1024 * 1024 }, // 5 MB
+});
 
 // Routes
 router.post("/upload", upload.single("file"), uploadFile);

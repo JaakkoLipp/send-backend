@@ -5,7 +5,7 @@ yarn-error.log
 dist/
 build/
 .DS_Store
-
+uploads/*
 # Environment variables
 .env
 

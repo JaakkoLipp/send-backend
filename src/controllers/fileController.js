@@ -43,6 +43,7 @@ const getFile = async (req, res) => {
     const { id } = req.params;
     console.log("Looking for file with ID:", id);
 
+    // Find the file in the database
     const file = await File.findOne({ id: id });
     if (!file) {
       console.error("File not found in database for ID:", id);
@@ -54,12 +55,20 @@ const getFile = async (req, res) => {
     const resolvedPath = path.resolve(file.path);
     console.log("Resolved file path:", resolvedPath);
 
-    res.download(resolvedPath, file.name, (err) => {
+    // Extract the original filename by removing the timestamp
+    const originalName = file.name.includes("-")
+      ? file.name.split("-").slice(1).join("-") // Remove the first part (timestamp)
+      : file.name;
+
+    console.log("Original filename:", originalName);
+
+    // Send the file for download with the cleaned filename
+    res.download(resolvedPath, originalName, (err) => {
       if (err) {
         console.error("Error during file download:", err);
-        res.status(500).json({ error: "Error downloading file" });
+        return res.status(500).json({ error: "Error downloading file" });
       } else {
-        // After successful download, delete file from uploads folder and database
+        // After successful download, delete the file from uploads folder and database
         fs.unlink(resolvedPath, async (unlinkErr) => {
           if (unlinkErr) {
             console.error("Error deleting file from server:", unlinkErr);
