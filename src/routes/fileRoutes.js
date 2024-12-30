@@ -1,6 +1,10 @@
 const express = require("express");
 const multer = require("multer");
-const { uploadFile, getFile } = require("../controllers/fileController");
+const {
+  uploadFile,
+  getFile,
+  deleteFile,
+} = require("../controllers/fileController");
 
 const router = express.Router();
 
@@ -23,6 +27,7 @@ const upload = multer({
 // Routes
 router.post("/upload", upload.single("file"), uploadFile);
 router.get("/download/:id", getFile);
+router.delete("/delete/:id", deleteFile);
 
 router.get("/all", (req, res) => {
   res.json({ message: "TBD" });

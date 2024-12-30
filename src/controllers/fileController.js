@@ -8,10 +8,21 @@ const uploadFile = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "No file uploaded" });
   }
-  //TODO: file encryption client side?
+  // Max 10 (500mb) files allowed in uploads folder
   try {
-    const generatedFileId = generateCustomId();
+    const uploadDir = path.resolve("uploads");
+    const files = fs.readdirSync(uploadDir);
+    if (files.length >= 10) {
+      // Cleanup uploaded file on rejection
+      fs.unlink(req.file.path, (unlinkErr) => {
+        if (unlinkErr) console.error("Error cleaning up file:", unlinkErr);
+      });
+      return res
+        .status(400)
+        .json({ error: "Upload limit reached. Try again later." });
+    }
 
+    const generatedFileId = generateCustomId();
     const file = new File({
       id: generatedFileId,
       name: req.file.originalname,
@@ -21,7 +32,6 @@ const uploadFile = async (req, res) => {
 
     await file.save();
     console.log("File saved to database:", file);
-
     res
       .status(201)
       .json({ message: "File uploaded successfully!", id: generatedFileId });
@@ -34,6 +44,34 @@ const uploadFile = async (req, res) => {
     }
     console.log(err);
     res.status(500).json({ error: "Error uploading file" });
+  }
+};
+
+// Delete a file with identifier
+const deleteFile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const file = await File.findOne({ id: id });
+    if (!file) {
+      return res.status(404).json({ error: "File not found" });
+    }
+    console.log("Requested for deletion with identifier: ", file);
+    const resolvedPath = path.resolve(file.path);
+    fs.unlink(resolvedPath, async (unlinkerr) => {
+      if (unlinkerr) {
+        console.error("Error deleting file from server:", unlinkerr);
+        return res.status(500).json({ error: "Error deleting file" });
+      } else {
+        console.log("File deleted from server:", resolvedPath);
+        // Remove file metadata from the database
+        await File.deleteOne({ id: id });
+        console.log("File metadata deleted from database.");
+      }
+    });
+    res.status(200).json({ message: "File removed successfully!", id: id });
+  } catch (err) {
+    console.error("Error in getFile:", err);
+    res.status(500).json({ error: "Error getting file" });
   }
 };
 
@@ -51,18 +89,14 @@ const getFile = async (req, res) => {
     }
 
     console.log("File found in database:", file);
-
     const resolvedPath = path.resolve(file.path);
-    console.log("Resolved file path:", resolvedPath);
 
-    // Extract the original filename by removing the timestamp
+    // Extract the original filename
     const originalName = file.name.includes("-")
       ? file.name.split("-").slice(1).join("-") // Remove the first part (timestamp)
       : file.name;
 
-    console.log("Original filename:", originalName);
-
-    // Send the file for download with the cleaned filename
+    // Download with the cleaned filename
     res.download(resolvedPath, originalName, (err) => {
       if (err) {
         console.error("Error during file download:", err);
@@ -89,4 +123,4 @@ const getFile = async (req, res) => {
   }
 };
 
-module.exports = { uploadFile, getFile };
+module.exports = { uploadFile, getFile, deleteFile };
