@@ -5,5 +5,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true },
   // TODO: password hashing implemented later
   password: { type: String, required: true },
+  files: [{ type: mongoose.Schema.Types.ObjectId, ref: "File" }],
 });
-//TODO: USERS OR FIREFOX SEND UNIQUE LINK METHOD?
+
+module.exports = mongoose.model("User", userSchema);

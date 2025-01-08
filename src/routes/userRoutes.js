@@ -1,6 +1,16 @@
 const express = require("express");
+const router = express.Router();
+const { validateToken } = require("../utils/validateToken");
+const {
+  login,
+  register,
+  userFiles,
+  forgotPasswd,
+} = require("../controllers/userController");
 
-// TODO: Implement user routes
-router.get("/login", (req, res) => res.json({ message: "TBD" }));
-router.get("/register", (req, res) => res.json({ message: "TBD" }));
-router.get("/logout", (req, res) => res.json({ message: "TBD" }));
+router.get("/login", login);
+router.get("/register", register);
+router.get("/userfiles", validateToken, userFiles);
+router.get("/forgot-password", forgotPasswd);
+
+module.exports = router;
