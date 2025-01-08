@@ -11,10 +11,6 @@ The backend service for the **File Sharing Application**, built with **Node.js**
 - **Maximum File Size**: Enforces a file size limit (e.g., 5 MB) for uploads.
 - **Secure Headers**: Exposes essential headers like `Content-Disposition` for filename handling.
 
-## Code structure and architecture
-
-Using MVC architecture for the backend, services are divided accordingly. Inside the source folder are controllers handling logic and processing, models for storing data correctly into MongoDB, and routes containing API paths acting as views. Utils folder contains (WIP) file encrypter and a unique ID generator for the uploaded files. Uploaded files are currently stored into uploads folder. Jest tests are located in tests folder, current code coverage is about 55%.
-
 ## Tech Stack
 
 - **Node.js**: Backend runtime.
@@ -93,6 +89,8 @@ Using MVC architecture for the backend, services are divided accordingly. Inside
 - Files are automatically deleted after a time-to-live (TTL) period (e.g., 5 minutes).
 
 ## Project Structure
+
+Using MVC architecture for the backend, services are divided accordingly. Inside the source folder are controllers handling logic and processing, models for storing data correctly into MongoDB, and routes containing API paths acting as views. Utils folder contains (WIP) file encrypter and a unique ID generator for the uploaded files. Uploaded files are currently stored into uploads folder. Jest tests are located in tests folder, current code coverage is about 55%.
 
 ```
 src/
