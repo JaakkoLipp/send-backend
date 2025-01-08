@@ -2,7 +2,6 @@
 
 The backend service for the **File Sharing Application**, built with **Node.js** and **Express**, and uses **MongoDB** for file metadata storage. This backend is designed to work seamlessly with the [File Sharing Frontend](https://github.com/JaakkoLipp/send-frontend) React project.
 
-
 ## Features
 
 - **File Upload**: Handle file uploads with unique identifiers.
@@ -12,6 +11,9 @@ The backend service for the **File Sharing Application**, built with **Node.js**
 - **Maximum File Size**: Enforces a file size limit (e.g., 5 MB) for uploads.
 - **Secure Headers**: Exposes essential headers like `Content-Disposition` for filename handling.
 
+## Code structure and architecture
+
+Using MVC architecture for the backend, services are divided accordingly. Inside the source folder are controllers handling logic and processing, models for storing data correctly into MongoDB, and routes containing API paths acting as views. Utils folder contains (WIP) file encrypter and a unique ID generator for the uploaded files. Uploaded files are currently stored into uploads folder. Jest tests are located in tests folder, current code coverage is about 55%.
 
 ## Tech Stack
 
@@ -26,20 +28,22 @@ The backend service for the **File Sharing Application**, built with **Node.js**
 - **npm**
 - **MongoDB** (remote or local)
 
-
 ## Installation
 
 1. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/yourusername/file-sharing-backend.git
    ```
 
 2. **Navigate to the Project Directory**:
+
    ```bash
    cd file-sharing-backend
    ```
 
 3. **Install Dependencies**:
+
    ```bash
    npm install
    ```
@@ -52,10 +56,10 @@ The backend service for the **File Sharing Application**, built with **Node.js**
    ```
    Replace `your-mongodb-uri` with your actual MongoDB connection string.
 
-
 ## Usage
 
 1. **Start the Server**:
+
    ```bash
    npm start
    ```
@@ -67,13 +71,16 @@ The backend service for the **File Sharing Application**, built with **Node.js**
 ## API Endpoints
 
 ### **File Operations**
+
 - **Upload a File**:
+
   - **Method**: `POST`
   - **URL**: `/api/files/upload`
   - **Body**: `multipart/form-data` containing the file.
   - **Headers**: Automatically enforces a set size limit.
 
 - **Download a File**:
+
   - **Method**: `GET`
   - **URL**: `/api/files/download/:id`
   - **Response**: Serves the requested file.
@@ -82,6 +89,7 @@ The backend service for the **File Sharing Application**, built with **Node.js**
   - Files are automatically deleted from the server and database after successful download.
 
 ### **Additional Features**
+
 - Files are automatically deleted after a time-to-live (TTL) period (e.g., 5 minutes).
 
 ## Project Structure
@@ -103,11 +111,10 @@ src/
 
 ## Environment Variables
 
-| Variable   | Description                              | Example                     |
-|------------|------------------------------------------|-----------------------------|
-| `PORT`     | Port for the backend server             | `5000`                      |
-| `MONGO_URI`| MongoDB connection string               | `mongodb://your-mongodb-uri`|
-
+| Variable    | Description                 | Example                      |
+| ----------- | --------------------------- | ---------------------------- |
+| `PORT`      | Port for the backend server | `5000`                       |
+| `MONGO_URI` | MongoDB connection string   | `mongodb://your-mongodb-uri` |
 
 ## To-Do Features
 
@@ -119,7 +126,6 @@ src/
   - Add user authentication for secure file handling.
 - **Advanced Analytics**:
   - Track file downloads and provide statistics.
-
 
 ## License
 

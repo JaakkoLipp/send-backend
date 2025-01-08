@@ -5,9 +5,9 @@ const {
   getFile,
   deleteFile,
 } = require("../controllers/fileController");
-
 const router = express.Router();
 
+// configs
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
