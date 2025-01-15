@@ -30,7 +30,7 @@ mongoose
 app.use(express.json());
 
 // Routes
-app.use("/api/files", fileRoutes);
+app.use("/files", fileRoutes);
 app.use("/", generalRoutes);
 
 // Multer filesize limiter error handler
